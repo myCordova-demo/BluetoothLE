@@ -36,7 +36,9 @@
       </ion-header-bar>
       <ion-content ng-controller="MainController">
           <div ng-repeat="device in model.devices">
-              {{device.name}}
+              <div style="padding: 5px">{{device.name}}
+                <button style="float: right" ng-click="connect(device)">Connect</button>
+              </div>
           </div>
       </ion-content>
     </ion-pane>

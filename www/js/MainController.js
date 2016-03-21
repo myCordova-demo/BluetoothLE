@@ -6,6 +6,10 @@ app.controller('MainController', ['$scope', 'BleDeviceWatcherService', function 
         devices: []
     };
 
+    $scope.connect = function (item) {
+        navigator.notification.alert('Connect to: ' + item.id);
+    }
+
     var watcher = new BleDeviceWatcherService();
 
     watcher.start(function (devicesCollection) {

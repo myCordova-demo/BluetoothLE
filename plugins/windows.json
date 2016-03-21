@@ -24,6 +24,9 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "ionic-blankapp"
+        },
+        "cordova-plugin-dialogs": {
+            "PACKAGE_NAME": "ionic-blankapp"
         }
     },
     "dependent_plugins": {}

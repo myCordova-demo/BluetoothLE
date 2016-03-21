@@ -3,6 +3,7 @@
 app.factory('BleDeviceItem', function () {
     function BleDeviceItem(name) {
         this.name = name;
+        this.id = name;
     }
 
     return BleDeviceItem;

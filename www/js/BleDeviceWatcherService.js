@@ -12,7 +12,7 @@ app.factory('BleDeviceWatcherService', ['BleDeviceItem', function (BleDeviceItem
 
         var me = this;
 
-        setInterval(function () {
+        setTimeout(function () {
             me._resultCollection = [new BleDeviceItem("Sergei's Band 62:1d LE"), new BleDeviceItem("MI1A")];
             callback(me._resultCollection);
         }, 3000);
