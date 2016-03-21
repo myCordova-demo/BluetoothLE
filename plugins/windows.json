@@ -21,6 +21,9 @@
         },
         "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "ionic-blankapp"
+        },
+        "cordova-plugin-bluetoothle": {
+            "PACKAGE_NAME": "ionic-blankapp"
         }
     },
     "dependent_plugins": {}
