@@ -1,9 +1,30 @@
 ﻿var app = angular.module('starter');
 
 app.factory('BleDeviceItem', function () {
-    function BleDeviceItem(name, id) {
-        this.name = name;
-        this.id = name;
+    function BleDeviceItem() {
+        this.id = null;
+        this.name = null;
+        this.address = null;
+        this.advertisement = null;
+    }
+
+    BleDeviceItem.fromRawInfo = function (rawInfo) {
+
+        var item = new BleDeviceItem();
+
+        ['address', 'advertisement', 'name'].forEach(function(prop) {
+            item[prop] = rawInfo[prop];
+        });
+
+        // calculated id based on address if it not available
+        if (!item.id) {
+
+        }
+
+        
+
+        return item;
+
     }
 
     return BleDeviceItem;

@@ -29,4 +29,5 @@
   <plugin name="ionic-plugin-keyboard" spec="~1.0.8" />
   <plugin name="cordova-plugin-bluetoothle" version="3.1.0" src="https://github.com/sgrebnov/cordova-plugin-bluetoothle" />
   <plugin name="cordova-plugin-dialogs" version="1.2.0" />
+  <preference name="android-targetSdkVersion" value="22" />
 </widget>
