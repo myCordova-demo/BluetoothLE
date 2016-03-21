@@ -1,0 +1,1 @@
+c:\BluetoothLE\platforms\windows\AppPackages\CordovaApp.Windows10_0.0.1.0_x64_debug_Test\CordovaApp.Windows10_0.0.1.0_x64_debug.appx
