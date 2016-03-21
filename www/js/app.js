@@ -20,5 +20,29 @@ angular.module('starter', ['ionic'])
     if(window.StatusBar) {
       StatusBar.styleDefault();
     }
+
+    startScan();
   });
 })
+
+function startScan() {
+
+
+    function startScanSuccess() {
+        console.log('startScanSuccess');
+    }
+
+    function handleError(err) {
+        console.log('handleError');
+    }
+
+
+    bluetoothle.initialize(function (result) {
+        if (result.status !== "enabled") {
+            handleError("Bluetooth is not enabled; status: " + result);
+            return;
+        }
+        bluetoothle.startScan(startScanSuccess, handleError, { services: [] });
+    }, handleError, { request: true, statusReceiver: false });
+}
+
