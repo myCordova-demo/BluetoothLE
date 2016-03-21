@@ -16,12 +16,8 @@ app.factory('BleDeviceItem', function () {
             item[prop] = rawInfo[prop];
         });
 
-        // calculated id based on address if it not available
-        if (!item.id) {
-
-        }
-
-        
+        // peripheral id is mac address w/o ':' delimiter
+        item.id = item.address.split(':').join('');
 
         return item;
 

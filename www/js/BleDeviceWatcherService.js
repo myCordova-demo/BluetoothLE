@@ -8,7 +8,25 @@ app.factory('BleDeviceWatcherService', ['$q', 'BleDeviceItem', function ($q, Ble
 
     BleDeviceWatcher.prototype.onDeviceInfoUpdate = function (deviceInfoUpdate) {
         var device = BleDeviceItem.fromRawInfo(deviceInfoUpdate);
-        //this.collectionUpdatedcallback
+        
+        var alreadyExists = false;
+        this._resultCollection.forEach(function (value, index, array) {
+            if (value.id == device.id) {
+                array[index] = device;
+                alreadyExists = true;
+            }
+        });
+
+        if (!alreadyExists) {
+            this._resultCollection.push(device);
+        }
+
+        // How cordova-plugin-bluetoothle handles deleted/removed event??
+
+        if (this._collectionUpdatedCallback) {
+            this._collectionUpdatedCallback(this._resultCollection);
+        }
+
     }
 
     BleDeviceWatcher.prototype.start = function (collectionUpdatedCallback) {
@@ -24,11 +42,12 @@ app.factory('BleDeviceWatcherService', ['$q', 'BleDeviceItem', function ($q, Ble
         var deferred = $q.defer();
 
         function scanCallback(result) {
+            deferred.resolve();
+
             if (result.status == "scanResult") {
+                // callback contains scan results
                 me.onDeviceInfoUpdate(result)
-            } else {
             }
-            
         }
 
         function handleCordovaError(err) {
@@ -68,7 +87,7 @@ app.factory('BleDeviceWatcherService', ['$q', 'BleDeviceItem', function ($q, Ble
             deferred.reject(err);
         }
 
-        bluetoothle.startScan(handleCordovaSuccess, handleCordovaError);
+        bluetoothle.stopScan(handleCordovaSuccess, handleCordovaError);
 
         return deferred.promise;
     }
