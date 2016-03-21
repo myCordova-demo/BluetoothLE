@@ -60,6 +60,12 @@ app.factory('BleDeviceWatcherService', ['$q', 'BleDeviceItem', function ($q, Ble
 
             if (result.status == "scanResult") {
                 // callback contains scan results
+
+                if (!result.name || !result.address) {
+                    // skip partial updates
+                    return;
+                }
+
                 me.onDeviceInfoUpdate(result)
             }
         }
