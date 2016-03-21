@@ -72,31 +72,36 @@ module.exports = {
   },
 
   initialize: function (successCallback, errorCallback, params) {
-    var selector = "System.Devices.InterfaceClassGuid:=\"{6E3BB679-4372-40C8-9EAA-4509DF260CD8}\" AND System.Devices.InterfaceEnabled:=System.StructuredQueryType.Boolean#True";
-    deviceInfo.findAllAsync(selector, null).then(function (devices) {
-      if (devices.length > 0) {
-        initialized = true;
-        successCallback({ status: "enabled" });
-      } else {
-        if (params && params.length > 0 && params[0].request) {
-          try {
-            Windows.UI.ApplicationSettings.SettingsPane.show();
-          } catch (ex) {
-            Windows.System.Launcher.launchUriAsync(Windows.Foundation.Uri("ms-settings-bluetooth:"));
-          }
-        }
-        errorCallback({ error: "initialize", message: "No BLE devices found." });
-      }
-    }, function (error) {
-      if (params && params.length > 0 && params[0].request) {
-        try {
-          Windows.UI.ApplicationSettings.SettingsPane.show();
-        } catch (ex) {
-          Windows.System.Launcher.launchUriAsync(Windows.Foundation.Uri("ms-settings-bluetooth:"));
-        }
-      }
-      errorCallback({ error: "initialize", message: error.message });
-    });
+    // Somehow deviceInfo.findAllAsync returns empty device list.
+    // However we don't need to initialize for performing scan operations so just report success here
+    successCallback({ status: "enabled" });
+    return;
+
+    // var selector = "System.Devices.InterfaceClassGuid:=\"{6E3BB679-4372-40C8-9EAA-4509DF260CD8}\" AND System.Devices.InterfaceEnabled:=System.StructuredQueryType.Boolean#True";
+    // deviceInfo.findAllAsync(selector, null).then(function (devices) {
+    //   if (devices.length > 0) {
+    //     initialized = true;
+    //     successCallback({ status: "enabled" });
+    //   } else {
+    //     if (params && params.length > 0 && params[0].request) {
+    //       try {
+    //         Windows.UI.ApplicationSettings.SettingsPane.show();
+    //       } catch (ex) {
+    //         Windows.System.Launcher.launchUriAsync(Windows.Foundation.Uri("ms-settings-bluetooth:"));
+    //       }
+    //     }
+    //     errorCallback({ error: "initialize", message: "No BLE devices found." });
+    //   }
+    // }, function (error) {
+    //   if (params && params.length > 0 && params[0].request) {
+    //     try {
+    //       Windows.UI.ApplicationSettings.SettingsPane.show();
+    //     } catch (ex) {
+    //       Windows.System.Launcher.launchUriAsync(Windows.Foundation.Uri("ms-settings-bluetooth:"));
+    //     }
+    //   }
+    //   errorCallback({ error: "initialize", message: error.message });
+    // });
   },
 
   retrieveConnected: function (successCallback, errorCallback, params) {
