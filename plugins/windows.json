@@ -7,22 +7,22 @@
         "files": {}
     },
     "installed_plugins": {
-        "cordova-plugin-device": {
+        "cordova-plugin-bluetoothle": {
             "PACKAGE_NAME": "ionic-blankapp"
         },
         "cordova-plugin-console": {
             "PACKAGE_NAME": "ionic-blankapp"
         },
-        "cordova-plugin-whitelist": {
+        "cordova-plugin-device": {
             "PACKAGE_NAME": "ionic-blankapp"
         },
         "cordova-plugin-statusbar": {
             "PACKAGE_NAME": "ionic-blankapp"
         },
-        "ionic-plugin-keyboard": {
+        "cordova-plugin-whitelist": {
             "PACKAGE_NAME": "ionic-blankapp"
         },
-        "cordova-plugin-bluetoothle": {
+        "ionic-plugin-keyboard": {
             "PACKAGE_NAME": "ionic-blankapp"
         }
     },
