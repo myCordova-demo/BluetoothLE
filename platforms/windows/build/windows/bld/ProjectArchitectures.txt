@@ -1,1 +1,0 @@
-c:\BluetoothLE\platforms\windows\CordovaApp.Windows10.jsproj;x64
