@@ -10,12 +10,26 @@ app.factory('BleDeviceWatcherService', ['$q', 'BleDeviceItem', function ($q, Ble
         var device = BleDeviceItem.fromRawInfo(deviceInfoUpdate);
         
         var alreadyExists = false;
+        var isDirty = false;
         this._resultCollection.forEach(function (value, index, array) {
             if (value.id == device.id) {
-                array[index] = device;
+
                 alreadyExists = true;
+
+                // Don't send notification if name or address have not been changed
+                // This prevents too often callback calls.
+                isDirty = value.name !== device.name || value.address !== device.address;
+
+                if (isDirty) {
+                    array[index] = device;
+                }
+                
             }
         });
+
+        if (alreadyExists && !isDirty) {
+            return;
+        }
 
         if (!alreadyExists) {
             this._resultCollection.push(device);
