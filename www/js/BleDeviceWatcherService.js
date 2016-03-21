@@ -11,10 +11,24 @@ app.factory('BleDeviceWatcherService', ['BleDeviceItem', function (BleDeviceItem
         };
 
         var me = this;
+        // Clean results first
+        me._resultCollection = [];
+        var scanFailed = false;
+
+        bluetoothle.startScan(function (scanResult) {
+            if (scanResult.status === 'scanResult ') {
+                me._resultCollection.push(new BleDeviceItem(scanResult.name, scanResult.address.replace(/:/g, '')));
+            }
+        }, function (error) {
+            scanFailed = true;
+            callback(new Error(error));
+        });
 
         setTimeout(function () {
-            me._resultCollection = [new BleDeviceItem("Sergei's Band 62:1d LE"), new BleDeviceItem("MI1A")];
-            callback(me._resultCollection);
+            bluetoothle.stopScan(); // Not interested in handling success/error here
+            if (!scanFailed) {
+                callback(me._resultCollection);
+            }
         }, 3000);
     }
 
