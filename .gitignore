@@ -2,4 +2,8 @@
 /bin/
 /bld/
 /platforms/
+
+/node_modules/
+/bower_Components/
+
 *.jsproj.user
